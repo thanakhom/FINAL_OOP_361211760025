@@ -19,65 +19,36 @@ public class PatientManagement {
             //find Patient
             findPatient (dao);
         }//main
-    private static void findPatient(PatientDAO dao) {
-        Scanner sc = new Scanner(System.in);
-        //input data
-        System.out.print("Enter Patient P_name:");
-        String p_name = sc.nextLine().trim();
-        System.out.print("Enter Patient P_gender:");
-        String p_gender = sc.nextLine().trim();
-        System.out.print("Enter Patient P_age");
-        int p_age = Integer.parseInt(sc.nextLine().trim());
-        System.out.print("Enter Patient P_address:");
-        String p_address = sc.nextLine().trim();
-        System.out.print("Enter Patient P_blood_result:");
-        String p_blood_result = sc.nextLine().trim();
-        System.out.print("Enter Patient P_ID:");
-        int p_ID = Integer.parseInt(sc.nextLine().trim());
-        //insert data to database
-        Patient newPatient = new Patient(p_ID, p_name, p_gender, p_age, p_address, p_blood_result);
-        dao.addPatient(newPatient);
-    }
     private static void deletePatient(PatientDAO dao) {
-        Scanner sc = new Scanner(System.in);
-        //input data
-        System.out.print("Enter Patient P_ID:");
-        int p_ID = Integer.parseInt(sc.nextLine().trim());
-        System.out.print("Enter Patient P_name:");
-        String p_name = sc.nextLine().trim();
-        System.out.print("Enter Patient P_gender:");
-        String p_gender = sc.nextLine().trim();
-        System.out.print("Enter Patient P_age");
-        int p_age = Integer.parseInt(sc.nextLine().trim());
-        System.out.print("Enter Patient P_address:");
-        String p_address = sc.nextLine().trim();
-        System.out.print("Enter Patient P_blood_result:");
-        String p_blood_result = sc.nextLine().trim();
-
-        //insert data to database
-        Patient newPatient = new Patient(p_ID, p_name, p_gender, p_age,p_address,p_blood_result);
-        dao.addPatient(newPatient);
+        Scanner sc=new Scanner(System.in);
+        System.out.print("Delete Patient with ID: ");
+        int id = Integer.parseInt(sc.nextLine().trim());
+        dao.deletePatient(id);
     }
 
-    private static void updatePatient(PatientDAO dao) {
-        Scanner sc = new Scanner(System.in);
-        //input data
-        System.out.print("Enter Patient P_name:");
-        String p_name = sc.nextLine().trim();
-        System.out.print("Enter Patient P_gender:");
-        String p_gender = sc.nextLine().trim();
-        System.out.print("Enter Patient P_age");
-        int p_age = Integer.parseInt(sc.nextLine().trim());
-        System.out.print("Enter Patient P_address:");
-        String p_address = sc.nextLine().trim();
-        System.out.print("Enter Patient P_blood_result;");
-        String p_blood_result = sc.nextLine().trim();
-        System.out.print("Enter Patient P_ID:");
-        int p_ID = Integer.parseInt(sc.nextLine().trim());
-        //insert data to database
-        Patient newPatient = new Patient(p_ID, p_name, p_gender, p_age,p_address,p_blood_result);
-        dao.addPatient(newPatient);
+    private static Patient updatePatient(PatientDAO dao) {
+        Patient ptt = updatePatient(dao);
+        Scanner sc=new Scanner(System.in);
+        System.out.print("Update new P_blood_result for Patient ID"
+                +ptt.getP_ID()+":");
+        String ns=String.valueOf(sc.nextLine().trim());
+        ptt.setP_blood_result(ns);
+        dao.updatePatient(ptt);
+        System.out.println("Update Patient with ID:"+ptt.getP_ID());
+        return ptt;
     }
+
+    private static Patient findPatient(PatientDAO dao) {
+
+        Scanner sc =new Scanner(System.in);
+        System.out.print("Enter an Patient ID:");
+        int id =Integer.parseInt(sc.nextLine().trim());
+        Patient ptt = dao.findPatient(id);
+        System.out.println(ptt.toString());
+        return ptt;
+    }
+
+
     private static void addPatient(PatientDAO dao) {
             Scanner sc = new Scanner(System.in);
             //input data
